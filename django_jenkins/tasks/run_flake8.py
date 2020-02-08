@@ -8,7 +8,7 @@ except ImportError:
     from io import StringIO
 
 
-from flake8.api.legacy import get_style_guide  # Quck hack again, 3d time flake8 would be removed, if no volounters found
+from flake8.api import legacy as flake8
 from django.conf import settings
 
 from . import set_option
@@ -64,8 +64,7 @@ class Reporter(object):
         old_stdout, flake8_output = sys.stdout, StringIO()
         sys.stdout = flake8_output
 
-        pep8style = get_style_guide(
-            parse_argv=False,
+        pep8style = flake8.get_style_guide(
             jobs='1',
             **pep8_options)
 
